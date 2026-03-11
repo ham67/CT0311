@@ -1,0 +1,20 @@
+server:
+  port: 9101
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          sso-client-app:
+            provider: sso-provider
+            client-id: sso-client-app
+            client-secret: sso-client-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+              - profile
+        provider:
+          sso-provider:
+            issuer-uri: http://localhost:8080

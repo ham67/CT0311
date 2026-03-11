@@ -85,6 +85,23 @@ public class SecurityConfig {
             repository.save(vueClient);
         }
 
+
+        if (repository.findByClientId("sso-client-app") == null) {
+            RegisteredClient ssoClientApp = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("sso-client-app")
+                    .clientSecret(passwordEncoder.encode("sso-client-secret"))
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                    .redirectUri("http://localhost:9101/login/oauth2/code/sso-client-app")
+                    .postLogoutRedirectUri("http://localhost:9101/")
+                    .scope("openid")
+                    .scope("profile")
+                    .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                    .build();
+            repository.save(ssoClientApp);
+        }
+
         return repository;
     }
 

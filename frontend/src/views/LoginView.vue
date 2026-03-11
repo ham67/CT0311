@@ -7,6 +7,7 @@
       <button @click="goLogin">跳转授权登录</button>
       <button @click="getMe">调用 /api/users/me</button>
       <button @click="$router.push('/tenant-register')">租户注册</button>
+      <button @click="goSsoClient">SSO客户端验证</button>
     </div>
 
     <pre style="background: #f6f8fa; padding: 12px; border-radius: 8px;">{{ output }}</pre>
@@ -27,6 +28,10 @@ const goLogin = () => {
     redirect_uri: 'http://localhost:5173/callback'
   })
   window.location.href = `http://localhost:8080/oauth2/authorize?${params.toString()}`
+}
+
+const goSsoClient = () => {
+  window.open('http://localhost:9101/user', '_blank')
 }
 
 const getMe = async () => {
