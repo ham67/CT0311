@@ -1,0 +1,15 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: jdbc:dm://127.0.0.1:5236/SYSDBA
+    username: SYSDBA
+    password: SYSDBA
+  jackson:
+    time-zone: Asia/Shanghai
+
+logging:
+  level:
+    org.springframework.security: info
