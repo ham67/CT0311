@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  cloud:
+    gateway:
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@ipKeyResolver}"
+            redis-rate-limiter.replenishRate: 30
+            redis-rate-limiter.burstCapacity: 60
+      routes:
+        - id: sso-auth-server
+          uri: http://localhost:9000
+          predicates:
+            - Path=/oauth2/**,/api/**,/.well-known/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
