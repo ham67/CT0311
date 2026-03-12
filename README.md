@@ -1,12 +1,12 @@
-# 统一登录平台（Spring Authorization Server + Vue + 达梦 + 网关限流）
+# 统一登录平台（Spring Authorization Server + Vue + MySQL + 网关限流）
 
 ## 目标能力
 - 统一认证：Spring Authorization Server（OIDC）
 - 前端：Vue 3
-- 数据库：达梦 DM8（Druid 连接池）
+- 数据库：MySQL 8.0（Druid 连接池）
 - 网关限流：Spring Cloud Gateway + Redis
 - 签名密钥：通过 KMS HTTP 接口拉取，避免代码硬编码
-- 持久化：用户、客户端、授权信息 JDBC/JPA 落库达梦
+- 持久化：用户、客户端、授权信息 JDBC/JPA 落库 MySQL 8.0
 - 租户注册：工作流审批 + 企业资质（统一社会信用代码）校验
 - 安全增强：审计日志、登录风控、黑白名单
 - SSO 单点登录：新增 OAuth2 Client 示例业务系统（`sso-client`）
@@ -21,7 +21,7 @@
 ```
 
 ## 后端（backend）关键实现
-1. **达梦 + Druid**
+1. **MySQL 8.0 + Druid**
    - `spring.datasource.type=com.alibaba.druid.pool.DruidDataSource`
 2. **Authorization Server 持久化**
    - `JdbcRegisteredClientRepository`
